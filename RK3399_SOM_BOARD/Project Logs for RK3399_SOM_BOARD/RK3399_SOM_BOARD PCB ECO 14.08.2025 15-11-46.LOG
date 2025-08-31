@@ -1,0 +1,21 @@
+Removed Member From Class: ClassName=MIPI-CSI0_SIG. GROUP Member=MIPI_TX1/RX1_CLK_P
+Removed Member From Class: ClassName=MIPI-CSI0_SIG. GROUP Member=MIPI_TX1/RX1_D0_P
+Removed Member From Class: ClassName=MIPI-CSI0_SIG. GROUP Member=MIPI_TX1/RX1_D1_P
+Removed Member From Class: ClassName=MIPI-CSI0_SIG. GROUP Member=MIPI_TX1/RX1_D2_P
+Removed Member From Class: ClassName=MIPI-CSI0_SIG. GROUP Member=MIPI_TX1/RX1_D3_P
+Removed Member From Class: ClassName=DIFF_PAIR_CLASS Member=NetR40_1
+Removed Member From Class: ClassName=DIFF_PAIR_CLASS Member=NetR41_1
+Added Member To Class: ClassName=DIFF_PAIR_CLASS Member=Wire HDMI_TX0_N
+Added Member To Class: ClassName=DIFF_PAIR_CLASS Member=Wire HDMI_TX0_P
+Added Member To Class: ClassName=DIFF_PAIR_CLASS Member=Wire HDMI_TX1_N
+Added Member To Class: ClassName=DIFF_PAIR_CLASS Member=Wire HDMI_TX1_P
+Added Member To Class: ClassName=DIFF_PAIR_CLASS Member=Wire HDMI_TX2_N
+Added Member To Class: ClassName=DIFF_PAIR_CLASS Member=Wire HDMI_TX2_P
+Added Member To Class: ClassName=DIFF_PAIR_CLASS Member=Wire HDMI_TXCLK_N
+Added Member To Class: ClassName=DIFF_PAIR_CLASS Member=Wire HDMI_TXCLK_P
+Added Member To Class: ClassName=DIFF_PAIR_CLASS Member=Wire MIPI_RX0_D3_N
+Added Member To Class: ClassName=MIPI-CSI1_SIG. GROUP Member=Wire MIPI_TX1/RX1_CLK_P
+Added Member To Class: ClassName=MIPI-CSI1_SIG. GROUP Member=Wire MIPI_TX1/RX1_D0_P
+Added Member To Class: ClassName=MIPI-CSI1_SIG. GROUP Member=Wire MIPI_TX1/RX1_D1_P
+Added Member To Class: ClassName=MIPI-CSI1_SIG. GROUP Member=Wire MIPI_TX1/RX1_D2_P
+Added Member To Class: ClassName=MIPI-CSI1_SIG. GROUP Member=Wire MIPI_TX1/RX1_D3_P

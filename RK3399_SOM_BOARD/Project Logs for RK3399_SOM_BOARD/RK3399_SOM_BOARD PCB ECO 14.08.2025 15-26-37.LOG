@@ -1,0 +1,20 @@
+Removed Member From Class: ClassName=50OHM_DDR_D Member=DDR1_A0
+Removed Member From Class: ClassName=50OHM_DDR_D Member=DDR1_A1
+Removed Member From Class: ClassName=50OHM_DDR_D Member=DDR1_A2
+Removed Member From Class: ClassName=50OHM_DDR_D Member=DDR1_A3
+Removed Member From Class: ClassName=50OHM_DDR_D Member=DDR1_A4
+Removed Member From Class: ClassName=50OHM_DDR_D Member=DDR1_A5
+Removed Member From Class: ClassName=50Ohm_SDMMC Member=EMMC_CLK
+Removed Member From Class: ClassName=50Ohm_SDMMC Member=EMMC_CMD
+Removed Member From Class: ClassName=50Ohm_SDMMC Member=EMMC_D0
+Removed Member From Class: ClassName=50Ohm_SDMMC Member=EMMC_D1
+Removed Member From Class: ClassName=50Ohm_SDMMC Member=EMMC_D2
+Removed Member From Class: ClassName=50Ohm_SDMMC Member=EMMC_D3
+Removed Member From Class: ClassName=50Ohm_SDMMC Member=EMMC_D4
+Removed Member From Class: ClassName=50Ohm_SDMMC Member=EMMC_D5
+Removed Member From Class: ClassName=50Ohm_SDMMC Member=EMMC_D6
+Removed Member From Class: ClassName=50Ohm_SDMMC Member=EMMC_D7
+Removed Member From Class: ClassName=50Ohm_SDMMC Member=EMMC_STRB
+Removed Member From Class: ClassName=50Ohm_SDMMC Member=NetR26_1
+Added Class: Name=50OHM_DDR_A
+Added Class: Name=50OHM_EMMC

@@ -1,0 +1,38 @@
+Removed Member From Class: ClassName=DDR_G-3 Member=DDR0_D24
+Removed Member From Class: ClassName=DDR_G-3 Member=DDR0_D25
+Removed Member From Class: ClassName=DDR_G-3 Member=DDR0_D26
+Removed Member From Class: ClassName=DDR_G-3 Member=DDR0_D27
+Removed Member From Class: ClassName=DDR_G-3 Member=DDR0_D28
+Removed Member From Class: ClassName=DDR_G-3 Member=DDR0_D29
+Removed Member From Class: ClassName=DDR_G-3 Member=DDR0_D30
+Removed Member From Class: ClassName=DDR_G-3 Member=DDR0_D31
+Removed Member From Class: ClassName=DDR_G-3 Member=DDR1_D24
+Removed Member From Class: ClassName=DDR_G-3 Member=DDR1_D25
+Removed Member From Class: ClassName=DDR_G-3 Member=DDR1_D26
+Removed Member From Class: ClassName=DDR_G-3 Member=DDR1_D27
+Removed Member From Class: ClassName=DDR_G-3 Member=DDR1_D28
+Removed Member From Class: ClassName=DDR_G-3 Member=DDR1_D29
+Removed Member From Class: ClassName=DDR_G-3 Member=DDR1_D30
+Removed Member From Class: ClassName=DDR_G-3 Member=DDR1_D31
+Added Member To Class: ClassName=50OHM_DDR_A Member=Wire DDR0_A0
+Added Member To Class: ClassName=50OHM_DDR_A Member=Wire DDR0_A1
+Added Member To Class: ClassName=50OHM_DDR_A Member=Wire DDR0_A2
+Added Member To Class: ClassName=50OHM_DDR_A Member=Wire DDR0_A3
+Added Member To Class: ClassName=50OHM_DDR_A Member=Wire DDR0_A4
+Added Member To Class: ClassName=50OHM_DDR_A Member=Wire DDR0_A5
+Added Member To Class: ClassName=DDR_G-4 Member=Wire DDR0_D24
+Added Member To Class: ClassName=DDR_G-4 Member=Wire DDR0_D25
+Added Member To Class: ClassName=DDR_G-4 Member=Wire DDR0_D26
+Added Member To Class: ClassName=DDR_G-4 Member=Wire DDR0_D27
+Added Member To Class: ClassName=DDR_G-4 Member=Wire DDR0_D28
+Added Member To Class: ClassName=DDR_G-4 Member=Wire DDR0_D29
+Added Member To Class: ClassName=DDR_G-4 Member=Wire DDR0_D30
+Added Member To Class: ClassName=DDR_G-4 Member=Wire DDR0_D31
+Added Member To Class: ClassName=DDR_G-4 Member=Wire DDR1_D24
+Added Member To Class: ClassName=DDR_G-4 Member=Wire DDR1_D25
+Added Member To Class: ClassName=DDR_G-4 Member=Wire DDR1_D26
+Added Member To Class: ClassName=DDR_G-4 Member=Wire DDR1_D27
+Added Member To Class: ClassName=DDR_G-4 Member=Wire DDR1_D28
+Added Member To Class: ClassName=DDR_G-4 Member=Wire DDR1_D29
+Added Member To Class: ClassName=DDR_G-4 Member=Wire DDR1_D30
+Added Member To Class: ClassName=DDR_G-4 Member=Wire DDR1_D31

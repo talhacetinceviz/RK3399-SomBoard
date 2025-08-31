@@ -1,0 +1,22 @@
+Record=TopLevelDocument|FileName=BlockDiagram.SchDoc|SheetNumber=2
+Record=NoMainPathDocument|SourceDocument=BlockDiagram.SchDoc|FileName=Cover.SchDoc|SheetNumber=1
+Record=NoMainPathDocument|SourceDocument=BlockDiagram.SchDoc|FileName=DDR4_260PIN_Connector.SchDoc|SheetNumber=19
+Record=NoMainPathDocument|SourceDocument=BlockDiagram.SchDoc|FileName=EMMC.SchDoc|SheetNumber=6
+Record=NoMainPathDocument|SourceDocument=BlockDiagram.SchDoc|FileName=LPDDR4 SDRAM-1.SchDoc|SheetNumber=4
+Record=NoMainPathDocument|SourceDocument=BlockDiagram.SchDoc|FileName=LPDDR4 SDRAM-2.SchDoc|SheetNumber=5
+Record=NoMainPathDocument|SourceDocument=BlockDiagram.SchDoc|FileName=PushButton_SYS-LED.SchDoc|SheetNumber=18
+Record=NoMainPathDocument|SourceDocument=BlockDiagram.SchDoc|FileName=Revision_Note.SchDoc|SheetNumber=3
+Record=NoMainPathDocument|SourceDocument=BlockDiagram.SchDoc|FileName=RGMII_PHY.SchDoc|SheetNumber=17
+Record=NoMainPathDocument|SourceDocument=BlockDiagram.SchDoc|FileName=RK3399_DVP_MIPI_CSI.SchDoc|SheetNumber=14
+Record=NoMainPathDocument|SourceDocument=BlockDiagram.SchDoc|FileName=RK3399_EDP_CSI_HDMI.SchDoc|SheetNumber=12
+Record=NoMainPathDocument|SourceDocument=BlockDiagram.SchDoc|FileName=RK3399_EMMC_ADC_PCIE.SchDoc|SheetNumber=11
+Record=NoMainPathDocument|SourceDocument=BlockDiagram.SchDoc|FileName=RK3399_PMU.SchDoc|SheetNumber=10
+Record=NoMainPathDocument|SourceDocument=BlockDiagram.SchDoc|FileName=RK3399_Power_Pins.SchDoc|SheetNumber=8
+Record=NoMainPathDocument|SourceDocument=BlockDiagram.SchDoc|FileName=RK3399_RGMII_SDIO_SPI_GPIO.SchDoc|SheetNumber=15
+Record=NoMainPathDocument|SourceDocument=BlockDiagram.SchDoc|FileName=RK3399_SDRAM.SchDoc|SheetNumber=9
+Record=NoMainPathDocument|SourceDocument=BlockDiagram.SchDoc|FileName=RK3399_USB2_TYPEC_USIC.SchDoc|SheetNumber=13
+Record=NoMainPathDocument|SourceDocument=BlockDiagram.SchDoc|FileName=SP1_TYPEC_PWR_IN.SchDoc|SheetNumber=20
+Record=NoMainPathDocument|SourceDocument=BlockDiagram.SchDoc|FileName=SP2_BUCKs_GPU_LOG_CPU-B.SchDoc|SheetNumber=21
+Record=NoMainPathDocument|SourceDocument=BlockDiagram.SchDoc|FileName=SP3_PMIC.SchDoc|SheetNumber=22
+Record=NoMainPathDocument|SourceDocument=BlockDiagram.SchDoc|FileName=USB_TYPEC_Connector.SchDoc|SheetNumber=16
+Record=NoMainPathDocument|SourceDocument=BlockDiagram.SchDoc|FileName=Wifi_Module.SchDoc|SheetNumber=7

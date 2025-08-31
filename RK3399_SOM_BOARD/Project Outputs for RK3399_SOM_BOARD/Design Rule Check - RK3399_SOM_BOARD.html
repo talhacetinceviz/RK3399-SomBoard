@@ -1,0 +1,915 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html">
+<style type="text/css">
+		h1, h2, h3, h4, h5, h6 {
+			font-family : segoe ui;
+			color : black;
+			background-color : #EDE7D9;
+			padding: 0.3em;
+		}
+
+		h1 {
+			font-size: 1.2em;
+		}		
+
+		h2 {
+			font-size: 1.2em;
+		}
+
+		body {
+			font-family : segoe ui;
+		}
+
+		td, th {
+			padding: 0.5em;
+			text-align : left;
+			width: 10em;
+		}
+		th {
+			background-color : #EEEEEE;
+
+		}
+		th.column1, td.column1 {
+			text-align: left;
+			width : auto;
+		}
+		table {
+			width : 100%;
+			font-size: 0.9em;
+		}
+
+		.DRC_summary_header {
+			padding-bottom : 0.1em;
+			border : 0px solid black;
+			width: 100%;
+			align: left;
+		}
+
+		.DRC_summary_header_col1,
+		.DRC_summary_header_col2, 
+		.DRC_summary_header_col3 {
+			color : black;
+			font-size:100%;
+			padding : 0em;
+			padding-top : 0.2em;
+			padding-bottom 0.2em;
+			border : 0px solid black;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.DRC_summary_header_col1 {
+			font-weight: bold;
+			width: 9em;
+		}
+
+		.DRC_summary_header_col2 {
+			width: 0.1em;
+		
+		}
+
+		.DRC_summary_header_col3 {
+			width : auto;
+		}
+
+		.header_holder {
+		    Width = 100%;
+		    border = 0px solid green;
+		    padding = 0;
+		}
+
+
+		.front_matter, .front_matter_column1, .front_matter_column2, .front_matter_column3
+		{
+			left : 0;
+			top : 0;
+			padding: 0em;
+			padding-top : 0.1em;
+			border : 0px solid black;
+			width : 100%;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.front_matter_column1 {
+			width : 8em;
+			font-weight: bold;
+		}
+
+		.front_matter_column2 {
+			width: 0.1em;
+		}
+
+		.front_matter_column3 {
+			width : auto;
+		}
+
+		.total_column1, .total_column {
+			font-weight : bold;
+		}
+		.total_column1 {
+			text-align : left;
+		}
+		.warning, .error {
+			color : red;
+			font-weight : bold;
+		}
+		tr.onmouseout_odd {
+			background-color : #white;
+		}
+		tr.onmouseout_even { 
+			background-color : #FAFAFA;
+		}
+		tr.onmouseover_odd, tr.onmouseover_even { 
+			background-color : #EEEEEE;
+		} 
+		a:link, a:visited, .q a:link,.q a:active,.q {
+			color: #21489e; 
+		}
+		a:link.callback, a:visited.callback { 
+			color: #21489e;
+		}
+		a:link.customize, a:visited.customize {
+			color: #C0C0C0;
+			position: absolute; 
+			right: 10px;
+		}	
+		p.contents_level1 {
+			font-weight : bold;
+			font-size : 110%;
+			margin : 0.5em;
+		}
+		p.contents_level2 {
+			position : relative;
+			left : 20px;
+			margin : 0.5em;
+		}
+	</style><script type="text/javascript">
+		function coordToMils(coord) {
+			var number = coord / 10000;
+			
+			if (number != number.toFixed(3))
+				number = number.toFixed(3);
+
+			return number + 'mil'
+		}
+
+		function coordToMM(coord) {
+			var number = 0.0254 * coord / 10000;
+			
+			if (number != number.toFixed(4))
+				number = number.toFixed(4);
+			
+			return number + 'mm'
+		}
+	
+		function convertCoord(coordNode, units) {
+			for (var i = 0; i < coordNode.childNodes.length; i++) {
+				coordNode.removeChild(coordNode.childNodes[i]);
+			}
+
+			var coord = coordNode.getAttribute('value');
+			if (coord != null) {
+				if (units == 'mm') {
+					textNode = document.createTextNode(coordToMM(coord));
+					coordNode.appendChild(textNode);
+				} else if (units == 'mil') {
+					textNode = document.createTextNode(coordToMils(coord));		
+					coordNode.appendChild(textNode);	
+				}
+			}
+		}
+	
+		function convertUnits(unitNode, units) {
+			for (var i = 0; i < unitNode.childNodes.length; i++) {
+				unitNode.removeChild(unitNode.childNodes[i]);		
+			}
+		
+			textNode = document.createTextNode(units); 
+			unitNode.appendChild(textNode);
+		}
+	
+		function changeUnits(radio_input, units) {
+			if (radio_input.checked) {
+			
+				var elements = document.getElementsByName('coordinate');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertCoord(elements[i], units);
+					}
+				}
+	
+				var elements = document.getElementsByName('units');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertUnits(elements[i], units);
+					}
+				}
+			}
+		}
+	</script><title>Design Rule Verification Report</title>
+</head>
+<body onload=""><img ALT="Altium" src="
+			file://C:\Users\Public\Documents\Altium\AD23\Templates\AD_logo.png
+		"><h1>Design Rule Verification Report</h1>
+<table class="header_holder">
+<td class="column1">
+<table class="front_matter">
+<tr class="front_matter">
+<td class="front_matter_column1">Date:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">1.09.2025</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">00:09:39</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Elapsed Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">00:00:09</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Filename:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3"><a href="file:///C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc" class="file"><acronym title="C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc">C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc</acronym></a></td>
+</tr>
+</table>
+</td>
+<td class="column2">
+<table class="DRC_summary_header">
+<tr>
+<td class="DRC_summary_header_col1">Warnings:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3" style="color : red">4</td></tr>
+<tr>
+<td class="DRC_summary_header_col1">Rule Violations:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3" style="color : red">165</td></tr>
+</table>
+</td>
+</table><a name="IDSULQEPLHWI11DFTUMHZYLGYWNPCYKT2YCVCPKSCMXY42XS2EDDPB"><h2>Summary</h2></a><table>
+<tr>
+<th class="column1">Warnings</th>
+<th class="column2">Count</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDNHV3YKLAWABPPITC1YZVIZ1CJJQFEUU2USASCKMB5X1XNHLEL51L">Unplated multi-layer pad(s) detected</a></td>
+<td class="column2">4</td>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">4</td>
+</tr>
+</table><br><table>
+<tr>
+<th class="column1">Rule Violations</th>
+<th class="column2">Count</th>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDAKISG0YLCV0PFQT3IM5AOWMYLOW20D2I4BLCW4LECEWCJ2VTIUU">Clearance Constraint (Gap=5.669mil) (InNetClass('PCIE SIG. GROUP')),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDI12HEWVFTEWTIGJMZXIO2QLD0F0YX0W4MEQA5NG22T4XFU10IHXE">Clearance Constraint (Gap=3.937mil) (InNetClass('50OHM_EMMC')),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDC4BWRQMA31H1OZVQTW5M4WYPJMN0UKDTZAMEXPHSLFFNHT23ZPH">Clearance Constraint (Gap=5.669mil) (InNetClass('MIPI-DSI0 SIG. GROUP')),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDKQ3XRIEFZD4DDMOW45XMZ5JMUE11ET3BMJ3FMQGGGLHCWESGQNZG">Clearance Constraint (Gap=6.968mil) (InNetClass('HDMI SIG. GROUP')),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDEMLL1VJHXX5UJGHFZVGLPGJZCKASHJG4IZX0RBLFUPNTZACTREAE">Clearance Constraint (Gap=7.874mil) (InNetClass('50OHM_DDR_A')OR InNetClass('50OHM_DDR_Ctrl')),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDXRSWYBYPWADEFY0520FGOH2T3MO52UNYX1IRT4EP3MCF2DVC4IUE">Clearance Constraint (Gap=9.449mil) (InNetClass('50Ohm_SDMMC')),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDGQCETGD0FOGQE1AAJAOXJ1GHWMB4B1TFGUBMYBKWF0SHTJ0WQCUD">Clearance Constraint (Gap=5.669mil) (InNet('DDR0_CLKA_N') OR InNet('DDR0_CLKA_P') OR InNet('DDR0_CLKB_N') OR InNet('DDR0_CLKB_P') OR InNet('DDR1_CLKA_N') OR InNet('DDR1_CLKA_P') OR InNet('DDR1_CLKB_N') OR InNet('DDR1_CLKB_P')),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#ID05TWORBNAWQHIWFBVMRJQ2P1RNO2GS4A0DXTVDNYQCHP2RXMHZIL">Clearance Constraint (Gap=6.496mil) (InNetClass('DDR_G-1') OR InNetClass('DDR_G-2') OR InNetClass('DDR_G-3') OR InNetClass('DDR_G-4')),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDEQEX1C1RCX43MGKRQ4WVXJUGMJOR0ZK3E4T33BO2KM1EP4PVJQME">Clearance Constraint (Gap=8.386mil) (InNetClass('EDP SIG. GROUP')),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDSSSL1OVXH22RPLXGLO23FYGOTMW1SK4GUFTJGEGNZO3N3S2MY4SO">Clearance Constraint (Gap=3.937mil) (InNetClass('DIFF_PAIR_CLASS')),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDX2CTWIAWY4BAENQGUYPEQZNTJH4WQK4RQAIGRLKKIEF5U3TPCYC">Clearance Constraint (Gap=3.937mil) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDJY0EAEYXDF10DVHPWZC2LPD3QCVXGWIYBV30RMHNJATGCB5TPQ3K">Clearance Constraint (Gap=6.968mil) (InNetClass('LAN SIG. GROUP')),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDZIALEEIH2N43QJKMSP0XQZ42DHRJJJJPLMYHGMAPS1NQ2VC53SI">Clearance Constraint (Gap=8.425mil) (InNetClass('TYPEC0 SIG. GROUP')OR InNetClass('TYPEC1 SIG. GROUP')OR InNetClass('USB2.0 SIG. GROUP')),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDCEGJYIXTTKKJBNQBKCJWRIXUHULGDCYALTS5TFS3LLGVJUDFNFH">Clearance Constraint (Gap=6.968mil) (InNetClass('MIPI-CSI0_SIG. GROUP')OR InNetClass('MIPI-CSI1_SIG. GROUP')),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDGGCTELEDECSVM0QBBGWOQUZMWIOIGN0OFA04N3BG2RFZWU11CTAK">Short-Circuit Constraint (Allowed=No) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDMJN03NJSBGZQHPMYYYHYM5TNSFXQSBY4OHGY0SDXQZBGQAJBYUDO">Un-Routed Net Constraint ( (All) )</a></td>
+<td class="column2">67</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID3A3LOGWW5OJSC54XZZISTESKI3WJNSVRCCK3RIY00JT3OXHR05K">Modified Polygon (Allow modified: No), (Allow shelved: No)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDJH35TY553CTUIPG1A4F3B4ZU55AYFEWBL3IQKPBROPG0L4OXRKK">Width Constraint (Min=2.336mil) (Max=4.987mil) (Preferred=4.987mil) (InNetClass('50OHM_MAC'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDTQIWLTMOUJQCIW1OGKPZ00HLCKTL3S0MPQX1MBOTW3RXDWS3JBVL">Width Constraint (Min=2.336mil) (Max=4.987mil) (Preferred=4.987mil) (InNetClass('50OHM_EMMC'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDGZ2GETYDUG1YBWAO0HUPV0TR4N0ZGSCXYKC0DVOGJ5D5S12XRGOM">Width Constraint (Min=2.336mil) (Max=4.987mil) (Preferred=4.987mil) (InNetClass('50Ohm_SDMMC'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDXNQD5LH3WKD3OT1DG2Q41PLO1V1IAIIYU1V4XBZHDWRRXHIHFHC">Width Constraint (Min=2.336mil) (Max=4.987mil) (Preferred=4.987mil) (InNetClass('50OHM_SDIO'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDPBX40TD2RSWVG41QRUBYNQGAIBCMBHPV5HYWGVDO1QYN5VZJWJOF">Width Constraint (Min=2.336mil) (Max=4.987mil) (Preferred=4.987mil) (InNetClass('50OHM_DDR_Ctrl'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDDMF5LTLREE4LFTB5X41WDAZM4LEPDSZE23SYUOEXXW4MZAARJBDB">Width Constraint (Min=2.336mil) (Max=4.987mil) (Preferred=4.987mil) (InNetClass('50OHM_DDR_A'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#ID4ECZ5AHRTSRTHLIJMRHXDUR1HL313KRQG1TOH0ETWAMTVUPV2HJ">Width Constraint (Min=2.336mil) (Max=4.987mil) (Preferred=4.987mil) (InNetClass('50OHM_DDR_D'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDZEX3HR0W11MZBSK4FJB1YSIANFZF4HPAHIKOSQLCUDO513PX2EIG">Width Constraint (Min=1.968mil) (Max=39.37mil) (Preferred=10mil) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDFSNUUO2KRQ4IHSVR0JD5EHQGREY1BG02H0CARWIK243W5UP5GXZG">Power Plane Connect Rule(Direct Connect )(Expansion=20mil) (Conductor Width=10mil) (Air Gap=10mil) (Entries=4) (InNet('GND'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDJN5ZWPFTPB5QIPI0KCUN2NWDQBHLNSCMYH43U0MSEGWGAH3IHDKI">Power Plane Connect Rule(Relief Connect )(Expansion=20mil) (Conductor Width=10mil) (Air Gap=10mil) (Entries=4) (All)</a></td>
+<td class="column2">98</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDL4PNCAHNVWLVNA5G2WOTZE1YLMGG2L3T4ZBM5HNV23OINCKVCUML">Length Constraint (Min=0mil) (Max=1299.213mil) (InNetClass('50OHM_DDR_D'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDM3HT513IVM4KCUU1KEEYQL4XLPTCTWALLRUWZIKVQJGFFO31HSFB">Matched Lengths(Tolerance=19.685mil) (InNetClass('50OHM_DDR_D'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDXT40H3GEARIGHZJPF0O2X4NZFV22JOCQSEQITCQ3NPD341UI4RL">Height Constraint (Min=0mil) (Max=1000mil) (Prefered=500mil) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">165</td>
+</tr>
+</table><br><a name="IDJWDOSJKKLTIMHULKV0MGOO3E3K4HKIKBJ12YARL52TRLXKOYLBDD"><h2>Warnings</h2></a><a name="IDNHV3YKLAWABPPITC1YZVIZ1CJJQFEUU2USASCKMB5X1XNHLEL51L"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="warning">Unplated multi-layer pad(s) detected</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5472.681mil|Location2.X=5552.366mil|Location1.Y=3736.897mil|Location2.Y=3855.952mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5472.681mil|Location2.X=5552.366mil|Location1.Y=3736.897mil|Location2.Y=3855.952mil|Absolute=True">Pad J5-E2(2058.76mil,1708.661mil) on Multi-Layer</acronym></a> on <a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3478.331mil|Location2.X=6193.732mil|Location1.Y=2087.764mil|Location2.Y=4042.732mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3478.331mil|Location2.X=6193.732mil|Location1.Y=2087.764mil|Location2.Y=4042.732mil|Absolute=True">Net GND</acronym></a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5812.838mil|Location2.X=5892.523mil|Location1.Y=3886.504mil|Location2.Y=4005.559mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5812.838mil|Location2.X=5892.523mil|Location1.Y=3886.504mil|Location2.Y=4005.559mil|Absolute=True">Pad J5-E4(2398.917mil,1858.268mil) on Multi-Layer</acronym></a> on <a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3478.331mil|Location2.X=6193.732mil|Location1.Y=2087.764mil|Location2.Y=4042.732mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3478.331mil|Location2.X=6193.732mil|Location1.Y=2087.764mil|Location2.Y=4042.732mil|Absolute=True">Net GND</acronym></a></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5472.681mil|Location2.X=5552.366mil|Location1.Y=3886.504mil|Location2.Y=4005.559mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5472.681mil|Location2.X=5552.366mil|Location1.Y=3886.504mil|Location2.Y=4005.559mil|Absolute=True">Pad J5-E3(2058.76mil,1858.268mil) on Multi-Layer</acronym></a> on <a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3478.331mil|Location2.X=6193.732mil|Location1.Y=2087.764mil|Location2.Y=4042.732mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3478.331mil|Location2.X=6193.732mil|Location1.Y=2087.764mil|Location2.Y=4042.732mil|Absolute=True">Net GND</acronym></a></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5812.838mil|Location2.X=5892.523mil|Location1.Y=3736.897mil|Location2.Y=3855.952mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5812.838mil|Location2.X=5892.523mil|Location1.Y=3736.897mil|Location2.Y=3855.952mil|Absolute=True">Pad J5-E1(2398.917mil,1708.661mil) on Multi-Layer</acronym></a> on <a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3478.331mil|Location2.X=6193.732mil|Location1.Y=2087.764mil|Location2.Y=4042.732mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3478.331mil|Location2.X=6193.732mil|Location1.Y=2087.764mil|Location2.Y=4042.732mil|Absolute=True">Net GND</acronym></a></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDMJN03NJSBGZQHPMYYYHYM5TNSFXQSBY4OHGY0SDXQZBGQAJBYUDO"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Un-Routed Net Constraint ( (All) )</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3871.177mil|Location2.X=4307.764mil|Location1.Y=3768.417mil|Location2.Y=4017.763mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3871.177mil|Location2.X=4307.764mil|Location1.Y=3768.417mil|Location2.Y=4017.763mil|Absolute=True">Un-Routed Net Constraint: Net VCC5V0_SYS Between Track (517.413mil,1765.429mil)(517.413mil,1780.654mil) on Bottom Layer And Pad C248-2(754mil,1830mil) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4106.921mil|Location2.X=4342.732mil|Location1.Y=2482.795mil|Location2.Y=2638.606mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4106.921mil|Location2.X=4342.732mil|Location1.Y=2482.795mil|Location2.Y=2638.606mil|Absolute=True">Un-Routed Net Constraint: Net VCC5V0_SYS Between Pad C284-2(665mil,539mil) on Top Layer And Via (879mil,405mil) from Top Layer to L1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5798.311mil|Location2.X=5907.051mil|Location1.Y=3742.055mil|Location2.Y=3850.795mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5798.311mil|Location2.X=5907.051mil|Location1.Y=3742.055mil|Location2.Y=3850.795mil|Absolute=True">Un-Routed Net Constraint: Unplated Pad J5-E1(2398.917mil,1708.661mil) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5798.311mil|Location2.X=5907.051mil|Location1.Y=3742.055mil|Location2.Y=3850.795mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5798.311mil|Location2.X=5907.051mil|Location1.Y=3742.055mil|Location2.Y=3850.795mil|Absolute=True">Un-Routed Net Constraint: Unplated Pad J5-E1(2398.917mil,1708.661mil) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5798.311mil|Location2.X=5907.051mil|Location1.Y=3742.055mil|Location2.Y=3850.795mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5798.311mil|Location2.X=5907.051mil|Location1.Y=3742.055mil|Location2.Y=3850.795mil|Absolute=True">Un-Routed Net Constraint: Unplated Pad J5-E1(2398.917mil,1708.661mil) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5798.311mil|Location2.X=5907.051mil|Location1.Y=3742.055mil|Location2.Y=3850.795mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5798.311mil|Location2.X=5907.051mil|Location1.Y=3742.055mil|Location2.Y=3850.795mil|Absolute=True">Un-Routed Net Constraint: Unplated Pad J5-E1(2398.917mil,1708.661mil) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5798.311mil|Location2.X=5907.051mil|Location1.Y=3742.055mil|Location2.Y=3850.795mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5798.311mil|Location2.X=5907.051mil|Location1.Y=3742.055mil|Location2.Y=3850.795mil|Absolute=True">Un-Routed Net Constraint: Unplated Pad J5-E1(2398.917mil,1708.661mil) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5798.311mil|Location2.X=5907.051mil|Location1.Y=3742.055mil|Location2.Y=3850.795mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5798.311mil|Location2.X=5907.051mil|Location1.Y=3742.055mil|Location2.Y=3850.795mil|Absolute=True">Un-Routed Net Constraint: Unplated Pad J5-E1(2398.917mil,1708.661mil) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5458.153mil|Location2.X=5566.894mil|Location1.Y=3742.055mil|Location2.Y=3850.795mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5458.153mil|Location2.X=5566.894mil|Location1.Y=3742.055mil|Location2.Y=3850.795mil|Absolute=True">Un-Routed Net Constraint: Unplated Pad J5-E2(2058.76mil,1708.661mil) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5458.153mil|Location2.X=5566.894mil|Location1.Y=3742.055mil|Location2.Y=3850.795mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5458.153mil|Location2.X=5566.894mil|Location1.Y=3742.055mil|Location2.Y=3850.795mil|Absolute=True">Un-Routed Net Constraint: Unplated Pad J5-E2(2058.76mil,1708.661mil) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5458.153mil|Location2.X=5566.894mil|Location1.Y=3742.055mil|Location2.Y=3850.795mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5458.153mil|Location2.X=5566.894mil|Location1.Y=3742.055mil|Location2.Y=3850.795mil|Absolute=True">Un-Routed Net Constraint: Unplated Pad J5-E2(2058.76mil,1708.661mil) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5458.153mil|Location2.X=5566.894mil|Location1.Y=3742.055mil|Location2.Y=3850.795mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5458.153mil|Location2.X=5566.894mil|Location1.Y=3742.055mil|Location2.Y=3850.795mil|Absolute=True">Un-Routed Net Constraint: Unplated Pad J5-E2(2058.76mil,1708.661mil) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5458.153mil|Location2.X=5566.894mil|Location1.Y=3742.055mil|Location2.Y=3850.795mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5458.153mil|Location2.X=5566.894mil|Location1.Y=3742.055mil|Location2.Y=3850.795mil|Absolute=True">Un-Routed Net Constraint: Unplated Pad J5-E2(2058.76mil,1708.661mil) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5458.153mil|Location2.X=5566.894mil|Location1.Y=3891.661mil|Location2.Y=4000.401mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5458.153mil|Location2.X=5566.894mil|Location1.Y=3891.661mil|Location2.Y=4000.401mil|Absolute=True">Un-Routed Net Constraint: Unplated Pad J5-E3(2058.76mil,1858.268mil) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5458.153mil|Location2.X=5566.894mil|Location1.Y=3891.661mil|Location2.Y=4000.401mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5458.153mil|Location2.X=5566.894mil|Location1.Y=3891.661mil|Location2.Y=4000.401mil|Absolute=True">Un-Routed Net Constraint: Unplated Pad J5-E3(2058.76mil,1858.268mil) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5458.153mil|Location2.X=5566.894mil|Location1.Y=3891.661mil|Location2.Y=4000.401mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5458.153mil|Location2.X=5566.894mil|Location1.Y=3891.661mil|Location2.Y=4000.401mil|Absolute=True">Un-Routed Net Constraint: Unplated Pad J5-E3(2058.76mil,1858.268mil) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5458.153mil|Location2.X=5566.894mil|Location1.Y=3891.661mil|Location2.Y=4000.401mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5458.153mil|Location2.X=5566.894mil|Location1.Y=3891.661mil|Location2.Y=4000.401mil|Absolute=True">Un-Routed Net Constraint: Unplated Pad J5-E3(2058.76mil,1858.268mil) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5458.153mil|Location2.X=5566.894mil|Location1.Y=3891.661mil|Location2.Y=4000.401mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5458.153mil|Location2.X=5566.894mil|Location1.Y=3891.661mil|Location2.Y=4000.401mil|Absolute=True">Un-Routed Net Constraint: Unplated Pad J5-E3(2058.76mil,1858.268mil) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5798.311mil|Location2.X=5907.051mil|Location1.Y=3891.661mil|Location2.Y=4000.401mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5798.311mil|Location2.X=5907.051mil|Location1.Y=3891.661mil|Location2.Y=4000.401mil|Absolute=True">Un-Routed Net Constraint: Unplated Pad J5-E4(2398.917mil,1858.268mil) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5798.311mil|Location2.X=5907.051mil|Location1.Y=3891.661mil|Location2.Y=4000.401mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5798.311mil|Location2.X=5907.051mil|Location1.Y=3891.661mil|Location2.Y=4000.401mil|Absolute=True">Un-Routed Net Constraint: Unplated Pad J5-E4(2398.917mil,1858.268mil) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5798.311mil|Location2.X=5907.051mil|Location1.Y=3891.661mil|Location2.Y=4000.401mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5798.311mil|Location2.X=5907.051mil|Location1.Y=3891.661mil|Location2.Y=4000.401mil|Absolute=True">Un-Routed Net Constraint: Unplated Pad J5-E4(2398.917mil,1858.268mil) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5798.311mil|Location2.X=5907.051mil|Location1.Y=3891.661mil|Location2.Y=4000.401mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5798.311mil|Location2.X=5907.051mil|Location1.Y=3891.661mil|Location2.Y=4000.401mil|Absolute=True">Un-Routed Net Constraint: Unplated Pad J5-E4(2398.917mil,1858.268mil) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5798.311mil|Location2.X=5907.051mil|Location1.Y=3891.661mil|Location2.Y=4000.401mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5798.311mil|Location2.X=5907.051mil|Location1.Y=3891.661mil|Location2.Y=4000.401mil|Absolute=True">Un-Routed Net Constraint: Unplated Pad J5-E4(2398.917mil,1858.268mil) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5798.311mil|Location2.X=5907.051mil|Location1.Y=3891.661mil|Location2.Y=4000.401mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5798.311mil|Location2.X=5907.051mil|Location1.Y=3891.661mil|Location2.Y=4000.401mil|Absolute=True">Un-Routed Net Constraint: Unplated Pad J5-E4(2398.917mil,1858.268mil) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3936.771mil|Location2.X=3986.619mil|Location1.Y=2650.456mil|Location2.Y=3850.28mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3936.771mil|Location2.X=3986.619mil|Location1.Y=2650.456mil|Location2.Y=3850.28mil|Absolute=True">Un-Routed Net Constraint: Net VCC5V0_SYS Between Pad U14-5(504.527mil,572.008mil) on Top Layer And Via (522.887mil,1752.548mil) from Top Layer to L1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5675.631mil|Location2.X=5734.929mil|Location1.Y=2358.332mil|Location2.Y=2371.349mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5675.631mil|Location2.X=5734.929mil|Location1.Y=2358.332mil|Location2.Y=2371.349mil|Absolute=True">Isolated copper: Split Plane  (DVDD3V3_RGMII) on PWR-2. Dead copper detected. Copper area is : 304.994 sq. mils</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5073.024mil|Location2.X=5116.896mil|Location1.Y=2887.599mil|Location2.Y=2931.471mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5073.024mil|Location2.X=5116.896mil|Location1.Y=2887.599mil|Location2.Y=2931.471mil|Absolute=True">Isolated copper: Split Plane  (GND) on GND-1. Copper island connected to pads/vias detected. Copper area is : 1197.644 sq. mils</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4118.017mil|Location2.X=4137.958mil|Location1.Y=3759.064mil|Location2.Y=3784.366mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4118.017mil|Location2.X=4137.958mil|Location1.Y=3759.064mil|Location2.Y=3784.366mil|Absolute=True">Isolated copper: Split Plane  (GND) on GND-1. Copper island connected to pads/vias detected. Copper area is : 407.937 sq. mils</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3821.538mil|Location2.X=3841.479mil|Location1.Y=3759.064mil|Location2.Y=3784.387mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3821.538mil|Location2.X=3841.479mil|Location1.Y=3759.064mil|Location2.Y=3784.387mil|Absolute=True">Isolated copper: Split Plane  (GND) on GND-1. Copper island connected to pads/vias detected. Copper area is : 407.979 sq. mils</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5073.024mil|Location2.X=5116.896mil|Location1.Y=2887.599mil|Location2.Y=2931.471mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5073.024mil|Location2.X=5116.896mil|Location1.Y=2887.599mil|Location2.Y=2931.471mil|Absolute=True">Isolated copper: Split Plane  (GND) on GND-2. Copper island connected to pads/vias detected. Copper area is : 1197.644 sq. mils</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4118.017mil|Location2.X=4137.958mil|Location1.Y=3759.064mil|Location2.Y=3784.366mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4118.017mil|Location2.X=4137.958mil|Location1.Y=3759.064mil|Location2.Y=3784.366mil|Absolute=True">Isolated copper: Split Plane  (GND) on GND-2. Copper island connected to pads/vias detected. Copper area is : 407.937 sq. mils</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3821.538mil|Location2.X=3841.479mil|Location1.Y=3759.064mil|Location2.Y=3784.387mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3821.538mil|Location2.X=3841.479mil|Location1.Y=3759.064mil|Location2.Y=3784.387mil|Absolute=True">Isolated copper: Split Plane  (GND) on GND-2. Copper island connected to pads/vias detected. Copper area is : 407.979 sq. mils</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5073.024mil|Location2.X=5116.896mil|Location1.Y=2887.599mil|Location2.Y=2931.471mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5073.024mil|Location2.X=5116.896mil|Location1.Y=2887.599mil|Location2.Y=2931.471mil|Absolute=True">Isolated copper: Split Plane  (GND) on GND-3. Copper island connected to pads/vias detected. Copper area is : 1197.644 sq. mils</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4118.017mil|Location2.X=4137.958mil|Location1.Y=3759.064mil|Location2.Y=3784.366mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4118.017mil|Location2.X=4137.958mil|Location1.Y=3759.064mil|Location2.Y=3784.366mil|Absolute=True">Isolated copper: Split Plane  (GND) on GND-3. Copper island connected to pads/vias detected. Copper area is : 407.937 sq. mils</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3821.538mil|Location2.X=3841.479mil|Location1.Y=3759.064mil|Location2.Y=3784.387mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3821.538mil|Location2.X=3841.479mil|Location1.Y=3759.064mil|Location2.Y=3784.387mil|Absolute=True">Isolated copper: Split Plane  (GND) on GND-3. Copper island connected to pads/vias detected. Copper area is : 407.979 sq. mils</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5073.024mil|Location2.X=5116.896mil|Location1.Y=2887.599mil|Location2.Y=2931.471mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5073.024mil|Location2.X=5116.896mil|Location1.Y=2887.599mil|Location2.Y=2931.471mil|Absolute=True">Isolated copper: Split Plane  (GND) on GND-4. Copper island connected to pads/vias detected. Copper area is : 1197.644 sq. mils</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4118.017mil|Location2.X=4137.958mil|Location1.Y=3759.064mil|Location2.Y=3784.366mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4118.017mil|Location2.X=4137.958mil|Location1.Y=3759.064mil|Location2.Y=3784.366mil|Absolute=True">Isolated copper: Split Plane  (GND) on GND-4. Copper island connected to pads/vias detected. Copper area is : 407.937 sq. mils</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3821.538mil|Location2.X=3841.479mil|Location1.Y=3759.064mil|Location2.Y=3784.387mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3821.538mil|Location2.X=3841.479mil|Location1.Y=3759.064mil|Location2.Y=3784.387mil|Absolute=True">Isolated copper: Split Plane  (GND) on GND-4. Copper island connected to pads/vias detected. Copper area is : 407.979 sq. mils</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5073.024mil|Location2.X=5116.896mil|Location1.Y=2887.599mil|Location2.Y=2931.471mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5073.024mil|Location2.X=5116.896mil|Location1.Y=2887.599mil|Location2.Y=2931.471mil|Absolute=True">Isolated copper: Split Plane  (GND) on GND-5. Copper island connected to pads/vias detected. Copper area is : 1197.644 sq. mils</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4118.017mil|Location2.X=4137.958mil|Location1.Y=3759.064mil|Location2.Y=3784.366mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4118.017mil|Location2.X=4137.958mil|Location1.Y=3759.064mil|Location2.Y=3784.366mil|Absolute=True">Isolated copper: Split Plane  (GND) on GND-5. Copper island connected to pads/vias detected. Copper area is : 407.937 sq. mils</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3821.538mil|Location2.X=3841.479mil|Location1.Y=3759.064mil|Location2.Y=3784.387mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3821.538mil|Location2.X=3841.479mil|Location1.Y=3759.064mil|Location2.Y=3784.387mil|Absolute=True">Isolated copper: Split Plane  (GND) on GND-5. Copper island connected to pads/vias detected. Copper area is : 407.979 sq. mils</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5055.828mil|Location2.X=5099.7mil|Location1.Y=2867.827mil|Location2.Y=2906.825mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5055.828mil|Location2.X=5099.7mil|Location1.Y=2867.827mil|Location2.Y=2906.825mil|Absolute=True">Isolated copper: Split Plane  (VCC_0V9) on PWR-2. Copper island connected to pads/vias detected. Copper area is : 1168.321 sq. mils</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4669.123mil|Location2.X=4720.405mil|Location1.Y=3043.873mil|Location2.Y=3075.195mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4669.123mil|Location2.X=4720.405mil|Location1.Y=3043.873mil|Location2.Y=3075.195mil|Absolute=True">Isolated copper: Split Plane  (VCC_1V8) on PWR-1. Copper island connected to pads/vias detected. Copper area is : 1203.189 sq. mils</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5323.828mil|Location2.X=5367.7mil|Location1.Y=2955.827mil|Location2.Y=3000mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5323.828mil|Location2.X=5367.7mil|Location1.Y=2955.827mil|Location2.Y=3000mil|Absolute=True">Isolated copper: Split Plane  (VCC_1V8) on PWR-1. Copper island connected to pads/vias detected. Copper area is : 1287.843 sq. mils</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4656.611mil|Location2.X=4698.588mil|Location1.Y=3040.332mil|Location2.Y=3056.7mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4656.611mil|Location2.X=4698.588mil|Location1.Y=3040.332mil|Location2.Y=3056.7mil|Absolute=True">Isolated copper: Split Plane  (VCC_3V0) on PWR-2. Dead copper detected. Copper area is : 348.079 sq. mils</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5807.597mil|Location2.X=5851.458mil|Location1.Y=3625.386mil|Location2.Y=3662.615mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5807.597mil|Location2.X=5851.458mil|Location1.Y=3625.386mil|Location2.Y=3662.615mil|Absolute=True">Isolated copper: Split Plane  (VCC_DDR) on PWR-1. Dead copper detected. Copper area is : 923.392 sq. mils</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4193.332mil|Location2.X=4241.094mil|Location1.Y=2650.682mil|Location2.Y=2708.195mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4193.332mil|Location2.X=4241.094mil|Location1.Y=2650.682mil|Location2.Y=2708.195mil|Absolute=True">Isolated copper: Split Plane  (VCC_EFUSE) on PWR-1. Copper island connected to pads/vias detected. Copper area is : 1872.683 sq. mils</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6019.828mil|Location2.X=6044.7mil|Location1.Y=3166.827mil|Location2.Y=3177.167mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6019.828mil|Location2.X=6044.7mil|Location1.Y=3166.827mil|Location2.Y=3177.167mil|Absolute=True">Isolated copper: Split Plane  (VCC_IN_CONN) on PWR-1. Copper island connected to pads/vias detected. Copper area is : 202.014 sq. mils</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6019.828mil|Location2.X=6044.7mil|Location1.Y=3238.36mil|Location2.Y=3248.7mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6019.828mil|Location2.X=6044.7mil|Location1.Y=3238.36mil|Location2.Y=3248.7mil|Absolute=True">Isolated copper: Split Plane  (VCC_IN_CONN) on PWR-1. Copper island connected to pads/vias detected. Copper area is : 202.014 sq. mils</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3746.863mil|Location2.X=3772.7mil|Location1.Y=2905.827mil|Location2.Y=2928.7mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3746.863mil|Location2.X=3772.7mil|Location1.Y=2905.827mil|Location2.Y=2928.7mil|Absolute=True">Isolated copper: Split Plane  (VCC_IN_CONN) on PWR-1. Copper island connected to pads/vias detected. Copper area is : 468.462 sq. mils</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3732.332mil|Location2.X=3739.23mil|Location1.Y=2902.122mil|Location2.Y=2932.404mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3732.332mil|Location2.X=3739.23mil|Location1.Y=2902.122mil|Location2.Y=2932.404mil|Absolute=True">Isolated copper: Split Plane  (VCC_IN_CONN) on PWR-1. Dead copper detected. Copper area is : 138.742 sq. mils</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3743.772mil|Location2.X=3748.274mil|Location1.Y=2198.142mil|Location2.Y=2217.385mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3743.772mil|Location2.X=3748.274mil|Location1.Y=2198.142mil|Location2.Y=2217.385mil|Absolute=True">Isolated copper: Split Plane  (VCC3V3_SYS) on PWR-2. Copper island connected to pads/vias detected. Copper area is : 56.881 sq. mils</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3724.087mil|Location2.X=3728.59mil|Location1.Y=2198.142mil|Location2.Y=2217.385mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3724.087mil|Location2.X=3728.59mil|Location1.Y=2198.142mil|Location2.Y=2217.385mil|Absolute=True">Isolated copper: Split Plane  (VCC3V3_SYS) on PWR-2. Copper island connected to pads/vias detected. Copper area is : 56.881 sq. mils</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5029.244mil|Location2.X=5115.615mil|Location1.Y=2913.962mil|Location2.Y=2969.102mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5029.244mil|Location2.X=5115.615mil|Location1.Y=2913.962mil|Location2.Y=2969.102mil|Absolute=True">Isolated copper: Split Plane  (VDD_CPU_L) on PWR-2. Copper island connected to pads/vias detected. Copper area is : 1769.925 sq. mils</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5027.654mil|Location2.X=5069.9mil|Location1.Y=3008.485mil|Location2.Y=3026.137mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5027.654mil|Location2.X=5069.9mil|Location1.Y=3008.485mil|Location2.Y=3026.137mil|Absolute=True">Isolated copper: Split Plane  (VDD_CPU_L) on PWR-2. Dead copper detected. Copper area is : 367.789 sq. mils</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4869.599mil|Location2.X=4902.405mil|Location1.Y=3131.391mil|Location2.Y=3142.195mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4869.599mil|Location2.X=4902.405mil|Location1.Y=3131.391mil|Location2.Y=3142.195mil|Absolute=True">Isolated copper: Split Plane  (VDD_GPU) on PWR-2. Dead copper detected. Copper area is : 188.364 sq. mils</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5018.764mil|Location2.X=5218.764mil|Location1.Y=3756.196mil|Location2.Y=3956.196mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5018.764mil|Location2.X=5218.764mil|Location1.Y=3756.196mil|Location2.Y=3956.196mil|Absolute=True">Un-Routed Net Constraint: Net DDR1_DQS2_N Between Via (1665mil,1768.433mil) from Top Layer to L3 And Track (1665mil,1768.433mil)(1666.797mil,1768.433mil) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5018.764mil|Location2.X=5218.764mil|Location1.Y=3770.763mil|Location2.Y=3970.763mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5018.764mil|Location2.X=5218.764mil|Location1.Y=3770.763mil|Location2.Y=3970.763mil|Absolute=True">Un-Routed Net Constraint: Net DDR1_DQS2_P Between Via (1665mil,1783mil) from Top Layer to L3 And Track (1665mil,1783mil)(1666.797mil,1783mil) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5158.764mil|Location2.X=5358.764mil|Location1.Y=2836.763mil|Location2.Y=3036.763mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5158.764mil|Location2.X=5358.764mil|Location1.Y=2836.763mil|Location2.Y=3036.763mil|Absolute=True">Un-Routed Net Constraint: Net EMMC_CLK Between Via (1805mil,849mil) from L1 to L2 And Track (1805mil,849mil)(1817.205mil,836.795mil) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3816.575mil|Location2.X=4095.502mil|Location1.Y=2390.952mil|Location2.Y=2737.399mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3816.575mil|Location2.X=4095.502mil|Location1.Y=2390.952mil|Location2.Y=2737.399mil|Absolute=True">Un-Routed Net Constraint: Net VCC5V0_SYS Between Track (462.811mil,403.189mil)(472mil,394mil) on Top Layer And Via (541.739mil,549.636mil) from Top Layer to Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4322.795mil|Location2.X=4483.732mil|Location1.Y=2482.795mil|Location2.Y=2506.484mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4322.795mil|Location2.X=4483.732mil|Location1.Y=2482.795mil|Location2.Y=2506.484mil|Absolute=True">Un-Routed Net Constraint: Net VCC5V0_SYS Between Via (879mil,405mil) from L1 to Bottom Layer And Via (1020mil,408.752mil) from L1 to Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3617.945mil|Location2.X=3657.567mil|Location1.Y=2197.795mil|Location2.Y=2217.732mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3617.945mil|Location2.X=3657.567mil|Location1.Y=2197.795mil|Location2.Y=2217.732mil|Absolute=True">Un-Routed Net Constraint: Net VCC5V0_SYS Between Via (174.15mil,120mil) from Top Layer to L1 And Via (193.835mil,120mil) from Top Layer to L1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3637.63mil|Location2.X=3677.252mil|Location1.Y=2197.795mil|Location2.Y=2217.732mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3637.63mil|Location2.X=3677.252mil|Location1.Y=2197.795mil|Location2.Y=2217.732mil|Absolute=True">Un-Routed Net Constraint: Net VCC5V0_SYS Between Via (193.835mil,120mil) from Top Layer to L1 And Via (213.52mil,120mil) from Top Layer to L1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3657.315mil|Location2.X=3696.937mil|Location1.Y=2197.795mil|Location2.Y=2217.732mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3657.315mil|Location2.X=3696.937mil|Location1.Y=2197.795mil|Location2.Y=2217.732mil|Absolute=True">Un-Routed Net Constraint: Net VCC5V0_SYS Between Via (213.52mil,120mil) from Top Layer to L1 And Via (233.205mil,120mil) from Top Layer to L1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3677mil|Location2.X=3906.732mil|Location1.Y=2197.795mil|Location2.Y=2453.732mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3677mil|Location2.X=3906.732mil|Location1.Y=2197.795mil|Location2.Y=2453.732mil|Absolute=True">Un-Routed Net Constraint: Net VCC5V0_SYS Between Via (233.205mil,120mil) from Top Layer to L1 And Via (443mil,356mil) from Top Layer to L1 </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4241.795mil|Location2.X=6082.484mil|Location1.Y=2656.795mil|Location2.Y=3897.732mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4241.795mil|Location2.X=6082.484mil|Location1.Y=2656.795mil|Location2.Y=3897.732mil|Absolute=True">Un-Routed Net Constraint: Net VCC5V0_SYS Between Via (798mil,1800mil) from L1 to Bottom Layer And Via (2618.752mil,579mil) from L1 to Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3876.795mil|Location2.X=3932.732mil|Location1.Y=3701.795mil|Location2.Y=3926.732mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3876.795mil|Location2.X=3932.732mil|Location1.Y=3701.795mil|Location2.Y=3926.732mil|Absolute=True">Un-Routed Net Constraint: Net VBUS_TYPEC Between Via (433mil,1829mil) from Top Layer to L1 And Via (469mil,1624mil) from Top Layer to L1 </acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDJN5ZWPFTPB5QIPI0KCUN2NWDQBHLNSCMYH43U0MSEGWGAH3IHDKI"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Power Plane Connect Rule(Relief Connect )(Expansion=20mil) (Conductor Width=10mil) (Air Gap=10mil) (Entries=4) (All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4502.515mil|Location2.X=4566.452mil|Location1.Y=3584.515mil|Location2.Y=3648.452mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4502.515mil|Location2.X=4566.452mil|Location1.Y=3584.515mil|Location2.Y=3648.452mil|Absolute=True">Starved Thermal on PWR-1: Via (1080.72mil,1528.72mil) from Top Layer to Bottom Layer. Blocked 2 out of 4 entries.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4614.23mil|Location2.X=4678.167mil|Location1.Y=2929.645mil|Location2.Y=2993.582mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4614.23mil|Location2.X=4678.167mil|Location1.Y=2929.645mil|Location2.Y=2993.582mil|Absolute=True">Starved Thermal on GND-1: Via (1192.434mil,873.85mil) from Top Layer to Bottom Layer. Blocked 3 out of 4 entries.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4614.23mil|Location2.X=4678.167mil|Location1.Y=2929.645mil|Location2.Y=2993.582mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4614.23mil|Location2.X=4678.167mil|Location1.Y=2929.645mil|Location2.Y=2993.582mil|Absolute=True">Starved Thermal on GND-2: Via (1192.434mil,873.85mil) from Top Layer to Bottom Layer. Blocked 3 out of 4 entries.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4662.795mil|Location2.X=4726.732mil|Location1.Y=3024.795mil|Location2.Y=3088.732mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4662.795mil|Location2.X=4726.732mil|Location1.Y=3024.795mil|Location2.Y=3088.732mil|Absolute=True">Starved Thermal on PWR-1: Via (1241mil,969mil) from Top Layer to L1. Blocked 3 out of 4 entries.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4666.795mil|Location2.X=4730.732mil|Location1.Y=2984.795mil|Location2.Y=3048.732mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4666.795mil|Location2.X=4730.732mil|Location1.Y=2984.795mil|Location2.Y=3048.732mil|Absolute=True">Starved Thermal on PWR-1: Via (1245mil,929mil) from Top Layer to L1. Blocked 2 out of 4 entries.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4755.506mil|Location2.X=4819.443mil|Location1.Y=3215.517mil|Location2.Y=3279.454mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4755.506mil|Location2.X=4819.443mil|Location1.Y=3215.517mil|Location2.Y=3279.454mil|Absolute=True">Starved Thermal on GND-3: Via (1333.711mil,1159.722mil) from L1 to Bottom Layer. Blocked 2 out of 4 entries.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4755.506mil|Location2.X=4819.443mil|Location1.Y=3215.517mil|Location2.Y=3279.454mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4755.506mil|Location2.X=4819.443mil|Location1.Y=3215.517mil|Location2.Y=3279.454mil|Absolute=True">Starved Thermal on GND-4: Via (1333.711mil,1159.722mil) from L1 to Bottom Layer. Blocked 2 out of 4 entries.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4755.506mil|Location2.X=4819.443mil|Location1.Y=3215.517mil|Location2.Y=3279.454mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4755.506mil|Location2.X=4819.443mil|Location1.Y=3215.517mil|Location2.Y=3279.454mil|Absolute=True">Starved Thermal on GND-5: Via (1333.711mil,1159.722mil) from L1 to Bottom Layer. Blocked 2 out of 4 entries.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4755.506mil|Location2.X=4819.443mil|Location1.Y=3215.517mil|Location2.Y=3279.454mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4755.506mil|Location2.X=4819.443mil|Location1.Y=3215.517mil|Location2.Y=3279.454mil|Absolute=True">Starved Thermal on GND-1: Via (1333.711mil,1159.722mil) from Top Layer to L1. Blocked 2 out of 4 entries.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4755.506mil|Location2.X=4819.443mil|Location1.Y=3215.517mil|Location2.Y=3279.454mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4755.506mil|Location2.X=4819.443mil|Location1.Y=3215.517mil|Location2.Y=3279.454mil|Absolute=True">Starved Thermal on GND-2: Via (1333.711mil,1159.722mil) from Top Layer to L1. Blocked 2 out of 4 entries.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4808.828mil|Location2.X=4872.765mil|Location1.Y=2875.114mil|Location2.Y=2939.051mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4808.828mil|Location2.X=4872.765mil|Location1.Y=2875.114mil|Location2.Y=2939.051mil|Absolute=True">Starved Thermal on GND-3: Via (1387.033mil,819.319mil) from L1 to Bottom Layer. Blocked 2 out of 4 entries.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4808.828mil|Location2.X=4872.765mil|Location1.Y=2875.114mil|Location2.Y=2939.051mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4808.828mil|Location2.X=4872.765mil|Location1.Y=2875.114mil|Location2.Y=2939.051mil|Absolute=True">Starved Thermal on GND-4: Via (1387.033mil,819.319mil) from L1 to Bottom Layer. Blocked 2 out of 4 entries.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4808.828mil|Location2.X=4872.765mil|Location1.Y=2875.114mil|Location2.Y=2939.051mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4808.828mil|Location2.X=4872.765mil|Location1.Y=2875.114mil|Location2.Y=2939.051mil|Absolute=True">Starved Thermal on GND-5: Via (1387.033mil,819.319mil) from L1 to Bottom Layer. Blocked 2 out of 4 entries.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4808.828mil|Location2.X=4872.765mil|Location1.Y=2875.114mil|Location2.Y=2939.051mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4808.828mil|Location2.X=4872.765mil|Location1.Y=2875.114mil|Location2.Y=2939.051mil|Absolute=True">Starved Thermal on GND-1: Via (1387.033mil,819.319mil) from Top Layer to L1. Blocked 2 out of 4 entries.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4808.828mil|Location2.X=4872.765mil|Location1.Y=2875.114mil|Location2.Y=2939.051mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4808.828mil|Location2.X=4872.765mil|Location1.Y=2875.114mil|Location2.Y=2939.051mil|Absolute=True">Starved Thermal on GND-2: Via (1387.033mil,819.319mil) from Top Layer to L1. Blocked 2 out of 4 entries.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4826.999mil|Location2.X=4890.936mil|Location1.Y=3072.385mil|Location2.Y=3136.322mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4826.999mil|Location2.X=4890.936mil|Location1.Y=3072.385mil|Location2.Y=3136.322mil|Absolute=True">Starved Thermal on PWR-2: Via (1405.204mil,1016.59mil) from Top Layer to L1. Blocked 2 out of 4 entries.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4844.782mil|Location2.X=4908.719mil|Location1.Y=3130.873mil|Location2.Y=3194.81mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4844.782mil|Location2.X=4908.719mil|Location1.Y=3130.873mil|Location2.Y=3194.81mil|Absolute=True">Starved Thermal on PWR-2: Via (1422.987mil,1075.079mil) from Top Layer to L3. Blocked 3 out of 4 entries.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4844.795mil|Location2.X=4908.732mil|Location1.Y=3091.795mil|Location2.Y=3155.732mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4844.795mil|Location2.X=4908.732mil|Location1.Y=3091.795mil|Location2.Y=3155.732mil|Absolute=True">Starved Thermal on PWR-2: Via (1423mil,1036mil) from Top Layer to L1. Blocked 2 out of 4 entries.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4863.043mil|Location2.X=4926.98mil|Location1.Y=3467.816mil|Location2.Y=3531.753mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4863.043mil|Location2.X=4926.98mil|Location1.Y=3467.816mil|Location2.Y=3531.753mil|Absolute=True">Starved Thermal on GND-3: Via (1441.248mil,1412.021mil) from L1 to Bottom Layer. Blocked 3 out of 4 entries.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4863.043mil|Location2.X=4926.98mil|Location1.Y=3467.816mil|Location2.Y=3531.753mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4863.043mil|Location2.X=4926.98mil|Location1.Y=3467.816mil|Location2.Y=3531.753mil|Absolute=True">Starved Thermal on GND-1: Via (1441.248mil,1412.021mil) from Top Layer to L1. Blocked 3 out of 4 entries.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4863.043mil|Location2.X=4926.98mil|Location1.Y=3467.816mil|Location2.Y=3531.753mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4863.043mil|Location2.X=4926.98mil|Location1.Y=3467.816mil|Location2.Y=3531.753mil|Absolute=True">Starved Thermal on GND-2: Via (1441.248mil,1412.021mil) from Top Layer to L1. Blocked 3 out of 4 entries.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4882.795mil|Location2.X=4946.732mil|Location1.Y=3592.795mil|Location2.Y=3656.732mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4882.795mil|Location2.X=4946.732mil|Location1.Y=3592.795mil|Location2.Y=3656.732mil|Absolute=True">Starved Thermal on PWR-1: Via (1461mil,1537mil) from Top Layer to L1. Blocked 3 out of 4 entries.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4896.795mil|Location2.X=4960.732mil|Location1.Y=2741.795mil|Location2.Y=2805.732mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4896.795mil|Location2.X=4960.732mil|Location1.Y=2741.795mil|Location2.Y=2805.732mil|Absolute=True">Starved Thermal on PWR-1: Via (1475mil,686mil) from Top Layer to L1. Blocked 3 out of 4 entries.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4900.107mil|Location2.X=4964.044mil|Location1.Y=3039.015mil|Location2.Y=3102.952mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4900.107mil|Location2.X=4964.044mil|Location1.Y=3039.015mil|Location2.Y=3102.952mil|Absolute=True">Starved Thermal on PWR-2: Via (1478.312mil,983.22mil) from Top Layer to L1. Blocked 2 out of 4 entries.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4915.74mil|Location2.X=4979.677mil|Location1.Y=3092.552mil|Location2.Y=3156.489mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4915.74mil|Location2.X=4979.677mil|Location1.Y=3092.552mil|Location2.Y=3156.489mil|Absolute=True">Starved Thermal on PWR-2: Via (1493.945mil,1036.757mil) from Top Layer to L1. Only 39% copper is connected to the hole.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4934.795mil|Location2.X=4998.732mil|Location1.Y=3070.795mil|Location2.Y=3134.732mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4934.795mil|Location2.X=4998.732mil|Location1.Y=3070.795mil|Location2.Y=3134.732mil|Absolute=True">Starved Thermal on PWR-2: Via (1513mil,1015mil) from Top Layer to L1. Only 49% copper is connected to the hole.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4935.795mil|Location2.X=4999.732mil|Location1.Y=2965.795mil|Location2.Y=3029.732mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4935.795mil|Location2.X=4999.732mil|Location1.Y=2965.795mil|Location2.Y=3029.732mil|Absolute=True">Starved Thermal on PWR-2: Via (1514mil,910mil) from Top Layer to L1. Blocked 2 out of 4 entries.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4940.512mil|Location2.X=5004.449mil|Location1.Y=2857.511mil|Location2.Y=2921.448mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4940.512mil|Location2.X=5004.449mil|Location1.Y=2857.511mil|Location2.Y=2921.448mil|Absolute=True">Starved Thermal on GND-3: Via (1518.716mil,801.716mil) from L1 to Bottom Layer. Blocked 3 out of 4 entries.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4940.512mil|Location2.X=5004.449mil|Location1.Y=2857.511mil|Location2.Y=2921.448mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4940.512mil|Location2.X=5004.449mil|Location1.Y=2857.511mil|Location2.Y=2921.448mil|Absolute=True">Starved Thermal on GND-4: Via (1518.716mil,801.716mil) from L1 to Bottom Layer. Blocked 3 out of 4 entries.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4940.512mil|Location2.X=5004.449mil|Location1.Y=2857.511mil|Location2.Y=2921.448mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4940.512mil|Location2.X=5004.449mil|Location1.Y=2857.511mil|Location2.Y=2921.448mil|Absolute=True">Starved Thermal on GND-5: Via (1518.716mil,801.716mil) from L1 to Bottom Layer. Blocked 3 out of 4 entries.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4940.512mil|Location2.X=5004.449mil|Location1.Y=2857.511mil|Location2.Y=2921.448mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4940.512mil|Location2.X=5004.449mil|Location1.Y=2857.511mil|Location2.Y=2921.448mil|Absolute=True">Starved Thermal on GND-1: Via (1518.716mil,801.716mil) from Top Layer to L1. Blocked 3 out of 4 entries.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4940.512mil|Location2.X=5004.449mil|Location1.Y=2857.511mil|Location2.Y=2921.448mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4940.512mil|Location2.X=5004.449mil|Location1.Y=2857.511mil|Location2.Y=2921.448mil|Absolute=True">Starved Thermal on GND-2: Via (1518.716mil,801.716mil) from Top Layer to L1. Blocked 3 out of 4 entries.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4989.795mil|Location2.X=5053.732mil|Location1.Y=2875.795mil|Location2.Y=2939.732mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4989.795mil|Location2.X=5053.732mil|Location1.Y=2875.795mil|Location2.Y=2939.732mil|Absolute=True">Starved Thermal on PWR-2: Via (1568mil,820mil) from Top Layer to L1. Blocked 2 out of 4 entries.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4991.692mil|Location2.X=5055.629mil|Location1.Y=2948.898mil|Location2.Y=3012.835mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4991.692mil|Location2.X=5055.629mil|Location1.Y=2948.898mil|Location2.Y=3012.835mil|Absolute=True">Starved Thermal on PWR-2: Via (1569.897mil,893.103mil) from Top Layer to L1. Blocked 2 out of 4 entries.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5003.795mil|Location2.X=5067.732mil|Location1.Y=2893.795mil|Location2.Y=2957.732mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5003.795mil|Location2.X=5067.732mil|Location1.Y=2893.795mil|Location2.Y=2957.732mil|Absolute=True">Starved Thermal on GND-3: Via (1582mil,838mil) from L1 to Bottom Layer. Blocked 3 out of 4 entries.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5016.795mil|Location2.X=5080.732mil|Location1.Y=3740.795mil|Location2.Y=3804.732mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5016.795mil|Location2.X=5080.732mil|Location1.Y=3740.795mil|Location2.Y=3804.732mil|Absolute=True">Starved Thermal on PWR-1: Via (1595mil,1685mil) from Top Layer to Bottom Layer. Blocked 3 out of 4 entries.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5018.841mil|Location2.X=5082.778mil|Location1.Y=3513.167mil|Location2.Y=3577.104mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5018.841mil|Location2.X=5082.778mil|Location1.Y=3513.167mil|Location2.Y=3577.104mil|Absolute=True">Starved Thermal on PWR-1: Via (1597.046mil,1457.372mil) from Top Layer to Bottom Layer. Blocked 2 out of 4 entries.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5039.534mil|Location2.X=5103.471mil|Location1.Y=2929.534mil|Location2.Y=2993.471mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5039.534mil|Location2.X=5103.471mil|Location1.Y=2929.534mil|Location2.Y=2993.471mil|Absolute=True">Starved Thermal on GND-3: Via (1617.739mil,873.739mil) from L1 to Bottom Layer. Blocked 2 out of 4 entries.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5039.534mil|Location2.X=5103.471mil|Location1.Y=2929.534mil|Location2.Y=2993.471mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5039.534mil|Location2.X=5103.471mil|Location1.Y=2929.534mil|Location2.Y=2993.471mil|Absolute=True">Starved Thermal on GND-4: Via (1617.739mil,873.739mil) from L1 to Bottom Layer. Blocked 2 out of 4 entries.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5039.534mil|Location2.X=5103.471mil|Location1.Y=2929.534mil|Location2.Y=2993.471mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5039.534mil|Location2.X=5103.471mil|Location1.Y=2929.534mil|Location2.Y=2993.471mil|Absolute=True">Starved Thermal on GND-5: Via (1617.739mil,873.739mil) from L1 to Bottom Layer. Blocked 2 out of 4 entries.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5039.534mil|Location2.X=5103.471mil|Location1.Y=2929.534mil|Location2.Y=2993.471mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5039.534mil|Location2.X=5103.471mil|Location1.Y=2929.534mil|Location2.Y=2993.471mil|Absolute=True">Starved Thermal on GND-1: Via (1617.739mil,873.739mil) from Top Layer to L1. Blocked 2 out of 4 entries.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5039.534mil|Location2.X=5103.471mil|Location1.Y=2929.534mil|Location2.Y=2993.471mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5039.534mil|Location2.X=5103.471mil|Location1.Y=2929.534mil|Location2.Y=2993.471mil|Absolute=True">Starved Thermal on GND-2: Via (1617.739mil,873.739mil) from Top Layer to L1. Blocked 2 out of 4 entries.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5043.795mil|Location2.X=5107.732mil|Location1.Y=2895.795mil|Location2.Y=2959.732mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5043.795mil|Location2.X=5107.732mil|Location1.Y=2895.795mil|Location2.Y=2959.732mil|Absolute=True">Starved Thermal on PWR-2: Via (1622mil,840mil) from Top Layer to L1. Blocked 2 out of 4 entries.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5045.795mil|Location2.X=5109.732mil|Location1.Y=2857.795mil|Location2.Y=2921.732mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5045.795mil|Location2.X=5109.732mil|Location1.Y=2857.795mil|Location2.Y=2921.732mil|Absolute=True">Starved Thermal on PWR-2: Via (1624mil,802mil) from Top Layer to L1. Blocked 4 out of 4 entries.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5061.711mil|Location2.X=5125.648mil|Location1.Y=2915.197mil|Location2.Y=2979.134mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5061.711mil|Location2.X=5125.648mil|Location1.Y=2915.197mil|Location2.Y=2979.134mil|Absolute=True">Starved Thermal on PWR-2: Via (1639.916mil,859.402mil) from Top Layer to L1. Blocked 3 out of 4 entries.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5062.991mil|Location2.X=5126.928mil|Location1.Y=2877.566mil|Location2.Y=2941.503mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5062.991mil|Location2.X=5126.928mil|Location1.Y=2877.566mil|Location2.Y=2941.503mil|Absolute=True">Starved Thermal on GND-3: Via (1641.196mil,821.771mil) from L1 to Bottom Layer. Blocked 4 out of 4 entries.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5062.991mil|Location2.X=5126.928mil|Location1.Y=2877.566mil|Location2.Y=2941.503mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5062.991mil|Location2.X=5126.928mil|Location1.Y=2877.566mil|Location2.Y=2941.503mil|Absolute=True">Starved Thermal on GND-4: Via (1641.196mil,821.771mil) from L1 to Bottom Layer. Blocked 4 out of 4 entries.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5062.991mil|Location2.X=5126.928mil|Location1.Y=2877.566mil|Location2.Y=2941.503mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5062.991mil|Location2.X=5126.928mil|Location1.Y=2877.566mil|Location2.Y=2941.503mil|Absolute=True">Starved Thermal on GND-5: Via (1641.196mil,821.771mil) from L1 to Bottom Layer. Blocked 4 out of 4 entries.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5062.991mil|Location2.X=5126.928mil|Location1.Y=2877.566mil|Location2.Y=2941.503mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5062.991mil|Location2.X=5126.928mil|Location1.Y=2877.566mil|Location2.Y=2941.503mil|Absolute=True">Starved Thermal on GND-1: Via (1641.196mil,821.771mil) from Top Layer to L1. Blocked 4 out of 4 entries.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5062.991mil|Location2.X=5126.928mil|Location1.Y=2877.566mil|Location2.Y=2941.503mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5062.991mil|Location2.X=5126.928mil|Location1.Y=2877.566mil|Location2.Y=2941.503mil|Absolute=True">Starved Thermal on GND-2: Via (1641.196mil,821.771mil) from Top Layer to L1. Blocked 4 out of 4 entries.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5103.644mil|Location2.X=5167.581mil|Location1.Y=3768.206mil|Location2.Y=3832.143mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5103.644mil|Location2.X=5167.581mil|Location1.Y=3768.206mil|Location2.Y=3832.143mil|Absolute=True">Starved Thermal on GND-5: Via (1681.849mil,1712.411mil) from L3 to Bottom Layer. Blocked 3 out of 4 entries.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5152.293mil|Location2.X=5216.23mil|Location1.Y=2928.293mil|Location2.Y=2992.23mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5152.293mil|Location2.X=5216.23mil|Location1.Y=2928.293mil|Location2.Y=2992.23mil|Absolute=True">Starved Thermal on PWR-2: Via (1730.498mil,872.498mil) from Top Layer to L1. Blocked 2 out of 4 entries.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5200.046mil|Location2.X=5263.983mil|Location1.Y=2887.296mil|Location2.Y=2951.233mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5200.046mil|Location2.X=5263.983mil|Location1.Y=2887.296mil|Location2.Y=2951.233mil|Absolute=True">Starved Thermal on GND-3: Via (1778.25mil,831.501mil) from Top Layer to Bottom Layer. Blocked 2 out of 4 entries.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5206.795mil|Location2.X=5270.732mil|Location1.Y=2807.795mil|Location2.Y=2871.732mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5206.795mil|Location2.X=5270.732mil|Location1.Y=2807.795mil|Location2.Y=2871.732mil|Absolute=True">Starved Thermal on PWR-2: Via (1785mil,752mil) from Top Layer to Bottom Layer. Blocked 3 out of 4 entries.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5242.583mil|Location2.X=5306.52mil|Location1.Y=2944.516mil|Location2.Y=3008.453mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5242.583mil|Location2.X=5306.52mil|Location1.Y=2944.516mil|Location2.Y=3008.453mil|Absolute=True">Starved Thermal on GND-3: Via (1820.788mil,888.721mil) from L1 to Bottom Layer. Blocked 3 out of 4 entries.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5243.086mil|Location2.X=5307.023mil|Location1.Y=2947.649mil|Location2.Y=3011.586mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5243.086mil|Location2.X=5307.023mil|Location1.Y=2947.649mil|Location2.Y=3011.586mil|Absolute=True">Starved Thermal on GND-1: Via (1821.291mil,891.854mil) from Top Layer to L1. Blocked 3 out of 4 entries.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5243.086mil|Location2.X=5307.023mil|Location1.Y=2947.649mil|Location2.Y=3011.586mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5243.086mil|Location2.X=5307.023mil|Location1.Y=2947.649mil|Location2.Y=3011.586mil|Absolute=True">Starved Thermal on GND-2: Via (1821.291mil,891.854mil) from Top Layer to L1. Blocked 3 out of 4 entries.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5278.215mil|Location2.X=5342.152mil|Location1.Y=3754.781mil|Location2.Y=3818.718mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5278.215mil|Location2.X=5342.152mil|Location1.Y=3754.781mil|Location2.Y=3818.718mil|Absolute=True">Starved Thermal on PWR-1: Via (1856.42mil,1698.986mil) from Top Layer to Bottom Layer. Blocked 2 out of 4 entries.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5289.286mil|Location2.X=5353.223mil|Location1.Y=2963.468mil|Location2.Y=3027.405mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5289.286mil|Location2.X=5353.223mil|Location1.Y=2963.468mil|Location2.Y=3027.405mil|Absolute=True">Starved Thermal on GND-3: Via (1867.491mil,907.673mil) from L1 to Bottom Layer. Blocked 3 out of 4 entries.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5289.286mil|Location2.X=5353.223mil|Location1.Y=2963.468mil|Location2.Y=3027.405mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5289.286mil|Location2.X=5353.223mil|Location1.Y=2963.468mil|Location2.Y=3027.405mil|Absolute=True">Starved Thermal on GND-4: Via (1867.491mil,907.673mil) from L1 to Bottom Layer. Blocked 3 out of 4 entries.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5289.286mil|Location2.X=5353.223mil|Location1.Y=2963.468mil|Location2.Y=3027.405mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5289.286mil|Location2.X=5353.223mil|Location1.Y=2963.468mil|Location2.Y=3027.405mil|Absolute=True">Starved Thermal on GND-5: Via (1867.491mil,907.673mil) from L1 to Bottom Layer. Blocked 2 out of 4 entries.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5289.286mil|Location2.X=5353.223mil|Location1.Y=2963.468mil|Location2.Y=3027.405mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5289.286mil|Location2.X=5353.223mil|Location1.Y=2963.468mil|Location2.Y=3027.405mil|Absolute=True">Starved Thermal on GND-1: Via (1867.491mil,907.673mil) from Top Layer to L1. Blocked 4 out of 4 entries.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5289.286mil|Location2.X=5353.223mil|Location1.Y=2963.468mil|Location2.Y=3027.405mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5289.286mil|Location2.X=5353.223mil|Location1.Y=2963.468mil|Location2.Y=3027.405mil|Absolute=True">Starved Thermal on GND-2: Via (1867.491mil,907.673mil) from Top Layer to L1. Blocked 4 out of 4 entries.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5303.614mil|Location2.X=5367.551mil|Location1.Y=3547.867mil|Location2.Y=3611.804mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5303.614mil|Location2.X=5367.551mil|Location1.Y=3547.867mil|Location2.Y=3611.804mil|Absolute=True">Starved Thermal on PWR-1: Via (1881.819mil,1492.072mil) from Top Layer to Bottom Layer. Blocked 2 out of 4 entries.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5313.795mil|Location2.X=5377.732mil|Location1.Y=2945.795mil|Location2.Y=3009.732mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5313.795mil|Location2.X=5377.732mil|Location1.Y=2945.795mil|Location2.Y=3009.732mil|Absolute=True">Starved Thermal on PWR-1: Via (1892mil,890mil) from Top Layer to L1. Blocked 4 out of 4 entries.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5404.277mil|Location2.X=5468.214mil|Location1.Y=3791.179mil|Location2.Y=3855.116mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5404.277mil|Location2.X=5468.214mil|Location1.Y=3791.179mil|Location2.Y=3855.116mil|Absolute=True">Starved Thermal on PWR-1: Via (1982.482mil,1735.384mil) from Top Layer to Bottom Layer. Blocked 2 out of 4 entries.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5732.541mil|Location2.X=5796.478mil|Location1.Y=2338.487mil|Location2.Y=2402.424mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5732.541mil|Location2.X=5796.478mil|Location1.Y=2338.487mil|Location2.Y=2402.424mil|Absolute=True">Starved Thermal on PWR-2: Via (2310.746mil,282.692mil) from Top Layer to L1. Blocked 2 out of 4 entries.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5796.519mil|Location2.X=5860.456mil|Location1.Y=3575.058mil|Location2.Y=3638.995mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5796.519mil|Location2.X=5860.456mil|Location1.Y=3575.058mil|Location2.Y=3638.995mil|Absolute=True">Starved Thermal on PWR-1: Via (2374.724mil,1519.263mil) from Top Layer to L1. Blocked 2 out of 4 entries.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5797.126mil|Location2.X=5861.062mil|Location1.Y=3591.01mil|Location2.Y=3654.947mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5797.126mil|Location2.X=5861.062mil|Location1.Y=3591.01mil|Location2.Y=3654.947mil|Absolute=True">Starved Thermal on PWR-1: Via (2375.33mil,1535.215mil) from Top Layer to L1. Only 45% copper is connected to the hole.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5797.559mil|Location2.X=5861.496mil|Location1.Y=3604.707mil|Location2.Y=3668.644mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5797.559mil|Location2.X=5861.496mil|Location1.Y=3604.707mil|Location2.Y=3668.644mil|Absolute=True">Starved Thermal on PWR-1: Via (2375.764mil,1548.912mil) from Top Layer to L1. Only 45% copper is connected to the hole.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5797.559mil|Location2.X=5861.496mil|Location1.Y=3619.358mil|Location2.Y=3683.294mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5797.559mil|Location2.X=5861.496mil|Location1.Y=3619.358mil|Location2.Y=3683.294mil|Absolute=True">Starved Thermal on PWR-1: Via (2375.764mil,1563.563mil) from Top Layer to Bottom Layer. Blocked 2 out of 4 entries.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5990.795mil|Location2.X=6054.732mil|Location1.Y=3137.795mil|Location2.Y=3201.732mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5990.795mil|Location2.X=6054.732mil|Location1.Y=3137.795mil|Location2.Y=3201.732mil|Absolute=True">Starved Thermal on PWR-1: Via (2569mil,1082mil) from Top Layer to Bottom Layer. Only 34% copper is connected to the hole.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5990.795mil|Location2.X=6054.732mil|Location1.Y=3156.795mil|Location2.Y=3220.732mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5990.795mil|Location2.X=6054.732mil|Location1.Y=3156.795mil|Location2.Y=3220.732mil|Absolute=True">Starved Thermal on PWR-1: Via (2569mil,1101mil) from Top Layer to Bottom Layer. Blocked 2 out of 4 entries.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5990.795mil|Location2.X=6054.732mil|Location1.Y=3175.795mil|Location2.Y=3239.732mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5990.795mil|Location2.X=6054.732mil|Location1.Y=3175.795mil|Location2.Y=3239.732mil|Absolute=True">Starved Thermal on PWR-1: Via (2569mil,1120mil) from Top Layer to Bottom Layer. Blocked 2 out of 4 entries.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5990.795mil|Location2.X=6054.732mil|Location1.Y=3194.795mil|Location2.Y=3258.732mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5990.795mil|Location2.X=6054.732mil|Location1.Y=3194.795mil|Location2.Y=3258.732mil|Absolute=True">Starved Thermal on PWR-1: Via (2569mil,1139mil) from Top Layer to Bottom Layer. Blocked 2 out of 4 entries.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5990.795mil|Location2.X=6054.732mil|Location1.Y=3213.795mil|Location2.Y=3277.732mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5990.795mil|Location2.X=6054.732mil|Location1.Y=3213.795mil|Location2.Y=3277.732mil|Absolute=True">Starved Thermal on PWR-1: Via (2569mil,1158mil) from Top Layer to Bottom Layer. Only 34% copper is connected to the hole.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6009.795mil|Location2.X=6073.732mil|Location1.Y=3137.795mil|Location2.Y=3201.732mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6009.795mil|Location2.X=6073.732mil|Location1.Y=3137.795mil|Location2.Y=3201.732mil|Absolute=True">Starved Thermal on PWR-1: Via (2588mil,1082mil) from Top Layer to Bottom Layer. Only 32% copper is connected to the hole.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6009.795mil|Location2.X=6073.732mil|Location1.Y=3156.795mil|Location2.Y=3220.732mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6009.795mil|Location2.X=6073.732mil|Location1.Y=3156.795mil|Location2.Y=3220.732mil|Absolute=True">Starved Thermal on PWR-1: Via (2588mil,1101mil) from Top Layer to Bottom Layer. Blocked 2 out of 4 entries.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6009.795mil|Location2.X=6073.732mil|Location1.Y=3175.795mil|Location2.Y=3239.732mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6009.795mil|Location2.X=6073.732mil|Location1.Y=3175.795mil|Location2.Y=3239.732mil|Absolute=True">Starved Thermal on PWR-1: Via (2588mil,1120mil) from Top Layer to Bottom Layer. Blocked 2 out of 4 entries.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6009.795mil|Location2.X=6073.732mil|Location1.Y=3194.795mil|Location2.Y=3258.732mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6009.795mil|Location2.X=6073.732mil|Location1.Y=3194.795mil|Location2.Y=3258.732mil|Absolute=True">Starved Thermal on PWR-1: Via (2588mil,1139mil) from Top Layer to Bottom Layer. Blocked 2 out of 4 entries.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6009.795mil|Location2.X=6073.732mil|Location1.Y=3213.795mil|Location2.Y=3277.732mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6009.795mil|Location2.X=6073.732mil|Location1.Y=3213.795mil|Location2.Y=3277.732mil|Absolute=True">Starved Thermal on PWR-1: Via (2588mil,1158mil) from Top Layer to Bottom Layer. Only 33% copper is connected to the hole.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6125.795mil|Location2.X=6189.732mil|Location1.Y=2423.795mil|Location2.Y=2487.732mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6125.795mil|Location2.X=6189.732mil|Location1.Y=2423.795mil|Location2.Y=2487.732mil|Absolute=True">Starved Thermal on GND-1: Via (2704mil,368mil) from Top Layer to Bottom Layer. Blocked 3 out of 4 entries.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6125.795mil|Location2.X=6189.732mil|Location1.Y=2423.795mil|Location2.Y=2487.732mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6125.795mil|Location2.X=6189.732mil|Location1.Y=2423.795mil|Location2.Y=2487.732mil|Absolute=True">Starved Thermal on GND-2: Via (2704mil,368mil) from Top Layer to Bottom Layer. Blocked 3 out of 4 entries.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6125.795mil|Location2.X=6189.732mil|Location1.Y=2423.795mil|Location2.Y=2487.732mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6125.795mil|Location2.X=6189.732mil|Location1.Y=2423.795mil|Location2.Y=2487.732mil|Absolute=True">Starved Thermal on GND-3: Via (2704mil,368mil) from Top Layer to Bottom Layer. Blocked 3 out of 4 entries.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6125.795mil|Location2.X=6189.732mil|Location1.Y=2423.795mil|Location2.Y=2487.732mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6125.795mil|Location2.X=6189.732mil|Location1.Y=2423.795mil|Location2.Y=2487.732mil|Absolute=True">Starved Thermal on GND-4: Via (2704mil,368mil) from Top Layer to Bottom Layer. Blocked 3 out of 4 entries.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6125.795mil|Location2.X=6189.732mil|Location1.Y=2423.795mil|Location2.Y=2487.732mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6125.795mil|Location2.X=6189.732mil|Location1.Y=2423.795mil|Location2.Y=2487.732mil|Absolute=True">Starved Thermal on GND-5: Via (2704mil,368mil) from Top Layer to Bottom Layer. Blocked 3 out of 4 entries.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6125.795mil|Location2.X=6189.732mil|Location1.Y=2423.795mil|Location2.Y=2487.732mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6125.795mil|Location2.X=6189.732mil|Location1.Y=2423.795mil|Location2.Y=2487.732mil|Absolute=True">Starved Thermal on PWR-1: Via (2704mil,368mil) from Top Layer to Bottom Layer. Blocked 3 out of 4 entries.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6125.795mil|Location2.X=6189.732mil|Location1.Y=2722.795mil|Location2.Y=2786.732mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6125.795mil|Location2.X=6189.732mil|Location1.Y=2722.795mil|Location2.Y=2786.732mil|Absolute=True">Starved Thermal on GND-1: Via (2704mil,667mil) from Top Layer to Bottom Layer. Blocked 3 out of 4 entries.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6125.795mil|Location2.X=6189.732mil|Location1.Y=2722.795mil|Location2.Y=2786.732mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6125.795mil|Location2.X=6189.732mil|Location1.Y=2722.795mil|Location2.Y=2786.732mil|Absolute=True">Starved Thermal on GND-2: Via (2704mil,667mil) from Top Layer to Bottom Layer. Blocked 3 out of 4 entries.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6125.795mil|Location2.X=6189.732mil|Location1.Y=2722.795mil|Location2.Y=2786.732mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6125.795mil|Location2.X=6189.732mil|Location1.Y=2722.795mil|Location2.Y=2786.732mil|Absolute=True">Starved Thermal on PWR-1: Via (2704mil,667mil) from Top Layer to Bottom Layer. Blocked 3 out of 4 entries.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3694.37mil|Location2.X=3758.307mil|Location1.Y=2175.795mil|Location2.Y=2239.732mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3694.37mil|Location2.X=3758.307mil|Location1.Y=2175.795mil|Location2.Y=2239.732mil|Absolute=True">Starved Thermal on PWR-2: Via (272.575mil,120mil) from Top Layer to L1. Only 44% copper is connected to the hole.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3714.055mil|Location2.X=3777.992mil|Location1.Y=2175.795mil|Location2.Y=2239.732mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3714.055mil|Location2.X=3777.992mil|Location1.Y=2175.795mil|Location2.Y=2239.732mil|Absolute=True">Starved Thermal on PWR-2: Via (292.26mil,120mil) from Top Layer to L1. Only 44% copper is connected to the hole.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3718.795mil|Location2.X=3782.732mil|Location1.Y=2874.795mil|Location2.Y=2938.732mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3718.795mil|Location2.X=3782.732mil|Location1.Y=2874.795mil|Location2.Y=2938.732mil|Absolute=True">Starved Thermal on PWR-1: Via (297mil,819mil) from Top Layer to L1. Blocked 3 out of 4 entries.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3928.649mil|Location2.X=3992.586mil|Location1.Y=3072.092mil|Location2.Y=3136.029mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3928.649mil|Location2.X=3992.586mil|Location1.Y=3072.092mil|Location2.Y=3136.029mil|Absolute=True">Starved Thermal on PWR-1: Via (506.854mil,1016.297mil) from Top Layer to Bottom Layer. Blocked 3 out of 4 entries.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3986.795mil|Location2.X=4050.732mil|Location1.Y=2863.795mil|Location2.Y=2927.732mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3986.795mil|Location2.X=4050.732mil|Location1.Y=2863.795mil|Location2.Y=2927.732mil|Absolute=True">Starved Thermal on PWR-2: Via (565mil,808mil) from Top Layer to L1. Blocked 3 out of 4 entries.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4184.795mil|Location2.X=4248.732mil|Location1.Y=2640.795mil|Location2.Y=2704.732mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4184.795mil|Location2.X=4248.732mil|Location1.Y=2640.795mil|Location2.Y=2704.732mil|Absolute=True">Starved Thermal on PWR-1: Via (763mil,585mil) from Top Layer to L1. Blocked 3 out of 4 entries.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4318.196mil|Location2.X=4382.133mil|Location1.Y=3794.663mil|Location2.Y=3858.6mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4318.196mil|Location2.X=4382.133mil|Location1.Y=3794.663mil|Location2.Y=3858.6mil|Absolute=True">Starved Thermal on PWR-1: Via (896.401mil,1738.868mil) from Top Layer to Bottom Layer. Blocked 3 out of 4 entries.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4324.313mil|Location2.X=4388.25mil|Location1.Y=3513.167mil|Location2.Y=3577.104mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\talha\OneDrive\Belgeler\Altium\WeldingMachine\PowerBoard\RK3399_SOM_BOARD\RK3399_SOM_BOARD.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4324.313mil|Location2.X=4388.25mil|Location1.Y=3513.167mil|Location2.Y=3577.104mil|Absolute=True">Starved Thermal on PWR-1: Via (902.518mil,1457.372mil) from Top Layer to Bottom Layer. Blocked 2 out of 4 entries.</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br></body>
+</html>

@@ -1,0 +1,44 @@
+Removed Pin From Net: NetName=TYPEC0_TX1_N Pin=C242-1
+Removed Pin From Net: NetName=C0_TX1_N Pin=C242-2
+Removed Pin From Net: NetName=TYPEC0_TX1_P Pin=C243-1
+Removed Pin From Net: NetName=C0_TX1_P Pin=C243-2
+Removed Pin From Net: NetName=TYPEC0_TX2_N Pin=C245-1
+Removed Pin From Net: NetName=C0_TX2_N Pin=C245-2
+Removed Pin From Net: NetName=TYPEC0_TX2_P Pin=C246-1
+Removed Pin From Net: NetName=C0_TX2_P Pin=C246-2
+Removed Member From Class: ClassName=USB_TYPEC_Connector Member=C242
+Removed Member From Class: ClassName=USB_TYPEC_Connector Member=C243
+Removed Member From Class: ClassName=USB_TYPEC_Connector Member=C245
+Removed Member From Class: ClassName=USB_TYPEC_Connector Member=C246
+Added Component: Designator=C111(CAP_0402)
+Add component (AddParameter): Name = "Case/Package"; Value = "0402"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer"; Value = "Walsin Technology Corporation"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer Part Number"; Value = "0402B104K250CT"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Supplier-1"; Value = "Digikey"; VariantName = "[No Variations]"
+Added Component: Designator=C124(CAP_0402)
+Add component (AddParameter): Name = "Case/Package"; Value = "0402"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer"; Value = "Walsin Technology Corporation"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer Part Number"; Value = "0402B104K250CT"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Supplier-1"; Value = "Digikey"; VariantName = "[No Variations]"
+Added Component: Designator=C125(CAP_0402)
+Add component (AddParameter): Name = "Case/Package"; Value = "0402"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer"; Value = "Walsin Technology Corporation"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer Part Number"; Value = "0402B104K250CT"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Supplier-1"; Value = "Digikey"; VariantName = "[No Variations]"
+Added Component: Designator=C140(CAP_0402)
+Add component (AddParameter): Name = "Case/Package"; Value = "0402"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer"; Value = "Walsin Technology Corporation"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer Part Number"; Value = "0402B104K250CT"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Supplier-1"; Value = "Digikey"; VariantName = "[No Variations]"
+Added Pin To Net: NetName=C0_TX1_N Pin=C111-1
+Added Pin To Net: NetName=TYPEC0_TX1_N Pin=C111-2
+Added Pin To Net: NetName=C0_TX1_P Pin=C124-1
+Added Pin To Net: NetName=TYPEC0_TX1_P Pin=C124-2
+Added Pin To Net: NetName=C0_TX2_N Pin=C125-1
+Added Pin To Net: NetName=TYPEC0_TX2_N Pin=C125-2
+Added Pin To Net: NetName=C0_TX2_P Pin=C140-1
+Added Pin To Net: NetName=TYPEC0_TX2_P Pin=C140-2
+Added Member To Class: ClassName=USB_TYPEC_Connector Member=Component C111 100nF
+Added Member To Class: ClassName=USB_TYPEC_Connector Member=Component C124 100nF
+Added Member To Class: ClassName=USB_TYPEC_Connector Member=Component C125 100nF
+Added Member To Class: ClassName=USB_TYPEC_Connector Member=Component C140 100nF
